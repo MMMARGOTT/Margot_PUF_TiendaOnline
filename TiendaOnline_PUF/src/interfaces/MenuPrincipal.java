@@ -21,7 +21,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal(Gestor gestor, ArrayList<Pedido> listaPedidos) {
+    public MenuPrincipal(Gestor gestor) {
         this.miConexion = gestor;
         initComponents();
     }

@@ -6,6 +6,7 @@ package interfaces;
 
 import gestor.Gestor;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modelo.Pedido;
 
 /**
@@ -15,12 +16,25 @@ import modelo.Pedido;
 public class ConsultarPedido extends javax.swing.JFrame {
     Gestor miConexion;
     ArrayList<Pedido> listaPedidos;
+    DefaultTableModel modelo;
+    
+    
 
     /**
      * Creates new form MenuPrincipal
      */
     public ConsultarPedido(Gestor gestor, ArrayList<Pedido> listaPedidos) {
         this.miConexion = gestor;
+        this.modelo = new DefaultTableModel();
+        
+        modelo.addColumn("id del Pedido");
+        modelo.addColumn("Nombre del Cliente");
+        modelo.addColumn("Lista de productos");
+        modelo.addColumn("Forma de pago");
+        modelo.addColumn("Estado del pedido");
+        
+       
+        
         initComponents();
     }
 
@@ -58,21 +72,21 @@ public class ConsultarPedido extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(239, 239, 239))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
