@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import modelo.Estado;
 import modelo.Pedido;
@@ -61,19 +63,28 @@ public class Gestor {
         }
     }
 
-    
-    public void registrarPedido( int idPedido, String nombreCliente, String productos, double totalPagar, Estado estado) {
-        try {
-            String sql = "INSERT INTO Pedidos (id_pedido, nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement sentencia = conn.prepareStatement(sql);
-            sentencia.setInt(1, idPedido);
-            sentencia.setString(2, nombreCliente);
-            sentencia.setString(3, productos);
-            sentencia.setDouble(4, totalPagar);
-            sentencia.setString(5, estado.toString()); //Esto es un enum
+    public boolean idValido(String idPedido) {
 
-            int insertados = sentencia.executeUpdate();
-            if (insertados > 0) {
+        String id = "^[0-9]";
+        Pattern pattern = Pattern.compile(id);
+
+        Matcher matcher = pattern.matcher(id);
+
+        return matcher.matches();
+
+    }
+
+    public void registrarPedido(String nombreCliente, String productos, double totalPagar, Estado estado) {
+        try {
+            String sql = "INSERT INTO Pedidos ( nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?)";
+            PreparedStatement sentencia = conn.prepareStatement(sql);
+            sentencia.setString(1, nombreCliente);
+            sentencia.setString(2, productos);
+            sentencia.setDouble(3, totalPagar);
+            sentencia.setString(4, estado.toString()); //Esto es un enum
+
+            int pedidosInsertados = sentencia.executeUpdate();
+            if (pedidosInsertados > 0) {
                 JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.");
             }
         } catch (SQLException ex) {
@@ -143,7 +154,7 @@ public class Gestor {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
-    
+
     /*
 
     public void pagoRegistrado(int idPedido) {    igual es boolean al ser un estado?
@@ -155,9 +166,8 @@ public class Gestor {
 
         }
     }
-*/
-    
-   public void actualizarEstadoPedido(int idPedido, String nuevoEstado){
-       
-   }
+     */
+    public void actualizarEstadoPedido(int idPedido) {
+
+    }
 }

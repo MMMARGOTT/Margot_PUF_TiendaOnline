@@ -7,6 +7,7 @@ package interfaces;
 import gestor.Gestor;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelo.Estado;
 import modelo.Pedido;
 
 /**
@@ -37,12 +38,10 @@ public class RegistrarPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextFieldId = new javax.swing.JTextField();
         jTextFieldNombreCliente = new javax.swing.JTextField();
         jTextFieldProductos = new javax.swing.JTextField();
         jTextFieldTotalPagar = new javax.swing.JTextField();
@@ -54,8 +53,6 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Registra un pedido");
-
-        jLabel2.setText("Id del pedido");
 
         jLabel3.setText("Nombre cliente");
 
@@ -88,7 +85,6 @@ public class RegistrarPedido extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
@@ -99,7 +95,6 @@ public class RegistrarPedido extends javax.swing.JFrame {
                             .addComponent(jTextFieldTotalPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(154, 154, 154)
@@ -111,13 +106,9 @@ public class RegistrarPedido extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(91, 91, 91)
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextFieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -146,20 +137,29 @@ public class RegistrarPedido extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
 
-        String idPedido = jTextFieldId.getText();
         String nombreCliente = jTextFieldNombreCliente.getText();
         String listaProductos = jTextFieldProductos.getText();
         String totalPagar = jTextFieldTotalPagar.getText();
         String estado = jTextFieldEstado.getText();
-        
-        
 
-        if (idPedido.isEmpty() || nombreCliente.isEmpty() || listaProductos.isEmpty() || totalPagar.isEmpty() || estado.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
+        Double totalPagarDouble = Double.parseDouble(totalPagar);
+
+        if (estado.equals("EN_PROCESO") || estado.equals("ENVIADO") || estado.equals("ENTREGADO")) {
+            Estado estadoEnum = Estado.valueOf(estado);
+
+            if (nombreCliente.isEmpty() || listaProductos.isEmpty() || totalPagar.isEmpty() || estado.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
+            } else {
+                
+                miConexion.registrarPedido(nombreCliente, listaProductos, totalPagarDouble, estadoEnum);
+                JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
+
+            }
+
+      
+
         } else {
-            //miConexion.registrarPedido(idPedido, nombreCliente, listaProductos, estado);
-            JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
-
+            JOptionPane.showMessageDialog(null, "El estado introducido es incorrecto");
         }
 
 
@@ -214,13 +214,11 @@ public class RegistrarPedido extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextFieldEstado;
-    private javax.swing.JTextField jTextFieldId;
     private javax.swing.JTextField jTextFieldNombreCliente;
     private javax.swing.JTextField jTextFieldProductos;
     private javax.swing.JTextField jTextFieldTotalPagar;

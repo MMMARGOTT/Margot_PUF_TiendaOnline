@@ -106,7 +106,7 @@ public class EstadoPedido extends javax.swing.JFrame {
         if (idPedido.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
         } else {
-            miConexion.actualizarEstadoPedido(SOMEBITS, idPedido);
+            //miConexion.actualizarEstadoPedido();
             JOptionPane.showMessageDialog(null, "El estado del pedido es:");
 
         }

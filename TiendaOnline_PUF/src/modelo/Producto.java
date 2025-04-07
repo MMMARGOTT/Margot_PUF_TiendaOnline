@@ -12,8 +12,10 @@ public class Producto extends Pedido {
 
     private int id;
 
-    public Producto(int id, String nombre, String productos, double totalPagar, String estado) {
-        super(id, nombre, productos, totalPagar, estado);
+    public Producto(int idPedido, String nombreCliente, String productos, double totalPagar) {
+        super(idPedido, nombreCliente, productos, totalPagar);
         this.id = id;
     }
+
+   
 }
