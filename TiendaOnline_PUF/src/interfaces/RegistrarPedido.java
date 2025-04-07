@@ -47,7 +47,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
         jTextFieldTotalPagar = new javax.swing.JTextField();
         jTextFieldEstado = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButtonVolver = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,10 +69,10 @@ public class RegistrarPedido extends javax.swing.JFrame {
             }
         });
 
-        jButtonVolver.setText("Volver");
-        jButtonVolver.addActionListener(new java.awt.event.ActionListener() {
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVolverActionPerformed(evt);
+                btnVolverActionPerformed(evt);
             }
         });
 
@@ -100,7 +100,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
                         .addGap(154, 154, 154)
                         .addComponent(jButton1)
                         .addGap(49, 49, 49)
-                        .addComponent(jButtonVolver)))
+                        .addComponent(btnVolver)))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -127,7 +127,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButtonVolver))
+                    .addComponent(btnVolver))
                 .addGap(50, 50, 50))
         );
 
@@ -149,15 +149,12 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
             if (nombreCliente.isEmpty() || listaProductos.isEmpty() || totalPagar.isEmpty() || estado.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
+
             } else {
-                
                 miConexion.registrarPedido(nombreCliente, listaProductos, totalPagarDouble, estadoEnum);
                 JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
 
             }
-
-      
-
         } else {
             JOptionPane.showMessageDialog(null, "El estado introducido es incorrecto");
         }
@@ -165,7 +162,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
         MenuPrincipal mp = new MenuPrincipal(miConexion);
         mp.setVisible(true);
@@ -173,7 +170,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
         this.dispose(); //Cierra la ventana, sin cerrar la app
 
-    }//GEN-LAST:event_jButtonVolverActionPerformed
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,8 +208,8 @@ public class RegistrarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVolver;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

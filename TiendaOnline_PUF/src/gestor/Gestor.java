@@ -73,10 +73,11 @@ public class Gestor {
         return matcher.matches();
 
     }
+   
 
     public void registrarPedido(String nombreCliente, String productos, double totalPagar, Estado estado) {
         try {
-            String sql = "INSERT INTO Pedidos ( nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO Pedidos (nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setString(1, nombreCliente);
             sentencia.setString(2, productos);

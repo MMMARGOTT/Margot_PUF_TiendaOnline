@@ -33,7 +33,18 @@ public class ConsultarPedido extends javax.swing.JFrame {
         modelo.addColumn("Forma de pago");
         modelo.addColumn("Estado del pedido");
         
-       
+       for (Pedido p : listaPedidos) {
+            Object[] columna = new Object[5];   
+            columna[0] = p.getIdPedido();
+            columna[1] = p.getNombreCliente();
+            columna[2] = p.getProductos();
+            columna[3] = p.getTotalPagar();
+            columna[4] = p.getEstados();
+            
+            modelo.addRow(columna);
+
+        }
+
         
         initComponents();
     }
@@ -49,24 +60,19 @@ public class ConsultarPedido extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
+        jTable1.setModel(modelo);
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Consultar");
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +80,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnVolver)
                 .addGap(239, 239, 239))
             .addGroup(layout.createSequentialGroup()
                 .addGap(55, 55, 55)
@@ -87,12 +93,22 @@ public class ConsultarPedido extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(btnVolver)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal(miConexion);
+        mp.setVisible(true);
+        mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
+
+        this.dispose(); //Cierra la ventana, sin cerrar la app
+        
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,7 +146,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
