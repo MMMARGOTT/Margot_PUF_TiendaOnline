@@ -16,14 +16,14 @@ public class Pedido {
     private String nombreCliente;
     private String productos;
     private double totalPagar;
-    private String estado;
+    private Estado estados;
 
-    public Pedido(int idPedido, String nombreCliente, String productos, double totalPagar, String estado) {
+    public Pedido(int idPedido, String nombreCliente, String productos, double totalPagar) {
         this.idPedido = idPedido;
         this.nombreCliente = nombreCliente;
         this.productos = productos;
         this.totalPagar = totalPagar;
-        this.estado = estado;
+        this.estados = Estado.EN_PROCESO;
     }
 
     public int getIdPedido() {
@@ -58,18 +58,18 @@ public class Pedido {
         this.totalPagar = totalPagar;
     }
 
-    public String getEstado() {
-        return estado;
+    public Estado getEstados() {
+        return estados;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setEstados(Estado estados) {
+        this.estados = estados;
     }
 
     @Override
     public String toString() {
-        return "Pedido{" + "idPedido=" + idPedido + ", nombreCliente=" + nombreCliente + ", productos=" + productos + ", totalPagar=" + totalPagar + ", estado=" + estado + '}';
+        return "Pedido{" + "idPedido=" + idPedido + ", nombreCliente=" + nombreCliente + ", productos=" + productos + ", totalPagar=" + totalPagar + ", estados=" + estados + '}';
     }
+    
+    
 }
-
-   

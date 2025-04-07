@@ -20,10 +20,11 @@ public class TiendaOnline_PUF {
     public static void main(String[] args) {
 
         try {
-            Gestor miConexion = new Gestor("Paola", "puf", "jdbc:mysql://localhost:3306/", "2323");
+            Gestor miConexion = new Gestor("puf", "puf", "jdbc:mysql://localhost:3306/", "puf");
+
             miConexion.initDataBase();
 
-            MenuPrincipal mp = new MenuPrincipal(miConexion,listaPedidos);
+            MenuPrincipal mp = new MenuPrincipal(miConexion);
             mp.setVisible(true);
             mp.setLocationRelativeTo(null);
 

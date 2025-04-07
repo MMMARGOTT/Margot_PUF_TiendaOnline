@@ -165,7 +165,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
     private void jButtonVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVolverActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal mp = new MenuPrincipal(miConexion,listaPedidos);
+        MenuPrincipal mp = new MenuPrincipal(miConexion);
         mp.setVisible(true);
         mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
 

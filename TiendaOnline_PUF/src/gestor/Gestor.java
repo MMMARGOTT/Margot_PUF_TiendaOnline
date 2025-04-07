@@ -41,7 +41,7 @@ public class Gestor {
 
             Class.forName(driver);
 
-            this.conn = (Connection) DriverManager.getConnection(conexion + db, user, password);
+            this.conn = DriverManager.getConnection(conexion + db, user, password);
 
         } catch (ClassNotFoundException ex) {
             throw new MyException("No has puesto la librería MySQL");
@@ -60,7 +60,7 @@ public class Gestor {
         }
     }
 
-    public void registrarPedido( int idPedido, String nombreCliente, String productos, double totalPagar) {
+    public void registrarPedido( int idPedido, String nombreCliente, String productos, double totalPagar, String estado) {
         try {
             String sql = "INSERT INTO Pedidos (id_pedido, nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?,?, ?, ?, 'EN_PROCESO')";
             PreparedStatement sentencia = conn.prepareStatement(sql);
@@ -68,10 +68,11 @@ public class Gestor {
             sentencia.setString(1, nombreCliente);
             sentencia.setString(2, productos);
             sentencia.setDouble(3, totalPagar);
+            sentencia.setString(4, estado);
 
             int insertados = sentencia.executeUpdate();
             if (insertados > 0) {
-                JOptionPane.showMessageDialog(null, "Pedido registrado exitosamente.");
+                JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
@@ -134,7 +135,7 @@ public class Gestor {
 
             int pagoRegistrado = sentencia.executeUpdate();
             if (pagoRegistrado > 0) {
-                JOptionPane.showMessageDialog(null, "Pago registrado  con éxito.");
+                JOptionPane.showMessageDialog(null, "Pago registrado con éxito.");
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
