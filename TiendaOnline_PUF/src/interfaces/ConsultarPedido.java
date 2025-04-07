@@ -19,7 +19,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public ConsultarPedido(Gestor gestor) {
+    public ConsultarPedido(Gestor gestor, ArrayList<Pedido> listaPedidos) {
         this.miConexion = gestor;
         initComponents();
     }

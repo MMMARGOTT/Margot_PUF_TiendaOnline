@@ -21,7 +21,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    public MenuPrincipal(Gestor gestor, ArrayList<Pedido> listaPedidos1) {
+    public MenuPrincipal(Gestor gestor, ArrayList<Pedido> listaPedidos) {
         this.miConexion = gestor;
         initComponents();
     }
@@ -138,8 +138,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
-        
-        ConsultarPedido cp = new ConsultarPedido(miConexion);
+
+        ConsultarPedido cp = new ConsultarPedido(miConexion, listaPedidos);
         cp.setVisible(true);
         cp.setLocationRelativeTo(null);
 
@@ -148,7 +148,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoActionPerformed
         // TODO add your handling code here:
-        
+
         EstadoPedido ep = new EstadoPedido(miConexion);
         ep.setVisible(true);
         ep.setLocationRelativeTo(null);
@@ -158,7 +158,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
-        
+
         EliminarPedido ep = new EliminarPedido(miConexion);
         ep.setVisible(true);
         ep.setLocationRelativeTo(null);
@@ -168,7 +168,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     /**

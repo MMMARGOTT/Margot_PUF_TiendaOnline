@@ -23,7 +23,7 @@ public class TiendaOnline_PUF {
             Gestor miConexion = new Gestor("Paola", "puf", "jdbc:mysql://localhost:3306/", "2323");
             miConexion.initDataBase();
 
-            MenuPrincipal mp = new MenuPrincipal(miConexion, listaPedidos);
+            MenuPrincipal mp = new MenuPrincipal(miConexion,listaPedidos);
             mp.setVisible(true);
             mp.setLocationRelativeTo(null);
 
