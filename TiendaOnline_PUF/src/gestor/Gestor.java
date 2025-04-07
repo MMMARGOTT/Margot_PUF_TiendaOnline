@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import modelo.Estado;
 import modelo.Pedido;
 
 /**
@@ -60,15 +61,16 @@ public class Gestor {
         }
     }
 
-    public void registrarPedido( int idPedido, String nombreCliente, String productos, double totalPagar, String estado) {
+    
+    public void registrarPedido( int idPedido, String nombreCliente, String productos, double totalPagar, Estado estado) {
         try {
-            String sql = "INSERT INTO Pedidos (id_pedido, nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?,?, ?, ?, 'EN_PROCESO')";
+            String sql = "INSERT INTO Pedidos (id_pedido, nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
-            sentencia.setString(1, nombreCliente);
-            sentencia.setString(2, productos);
-            sentencia.setDouble(3, totalPagar);
-            sentencia.setString(4, estado);
+            sentencia.setString(2, nombreCliente);
+            sentencia.setString(3, productos);
+            sentencia.setDouble(4, totalPagar);
+            sentencia.setString(5, estado.toString()); //Esto es un enum
 
             int insertados = sentencia.executeUpdate();
             if (insertados > 0) {

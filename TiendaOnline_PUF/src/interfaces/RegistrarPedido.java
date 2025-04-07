@@ -151,11 +151,13 @@ public class RegistrarPedido extends javax.swing.JFrame {
         String listaProductos = jTextFieldProductos.getText();
         String totalPagar = jTextFieldTotalPagar.getText();
         String estado = jTextFieldEstado.getText();
+        
+        
 
         if (idPedido.isEmpty() || nombreCliente.isEmpty() || listaProductos.isEmpty() || totalPagar.isEmpty() || estado.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
         } else {
-            miConexion.registrarPedido(SOMEBITS, nombreCliente, listaProductos, ALLBITS);
+            //miConexion.registrarPedido(idPedido, nombreCliente, listaProductos, estado);
             JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
 
         }
