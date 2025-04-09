@@ -123,11 +123,12 @@ public class Gestor {
         return listaPedidos;
     }
 
-    public void modificarEstadoPedido(int idPedido) {
+    public void modificarEstadoPedido(int idPedido, String nuevoEstado) {
         try {
             String sql = "UPDATE Pedidos SET estado_pedido = ? WHERE id_pedido = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
+            sentencia.setString(2, nuevoEstado);
 
             int pedidoActualizado = sentencia.executeUpdate();
             if (pedidoActualizado > 0) {

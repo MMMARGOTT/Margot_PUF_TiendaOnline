@@ -113,15 +113,16 @@ public class EstadoPedido extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
 
-        String nombreCliente = jTextFieldPedido.getText();
-
-        if (nombreCliente.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
-        } else {
-            //miConexion.actualizarEstadoPedido();
-            JOptionPane.showMessageDialog(null, "El estado del pedido es:");
-
+        String idPedido = jTextFieldPedido.getText();
+        if (idPedido.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el id de tu pedido, gracias");
+            return;
         }
+        int idPedidoInt = Integer.parseInt(idPedido);
+        String estadoEnum = "ENVIADO";
+
+        miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
+
 
     }//GEN-LAST:event_btnModificarActionPerformed
 

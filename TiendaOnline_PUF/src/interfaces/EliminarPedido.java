@@ -14,7 +14,7 @@ import modelo.Pedido;
  * @author paolaschicote
  */
 public class EliminarPedido extends javax.swing.JFrame {
-    
+
     Gestor miConexion;
     ArrayList<Pedido> listaPedidos;
 
@@ -115,8 +115,7 @@ public class EliminarPedido extends javax.swing.JFrame {
         int idPedidoInt = Integer.parseInt(idPedido);
         miConexion.eliminarPedido(idPedidoInt);
         JOptionPane.showMessageDialog(this, "Pedido eliminado con éxito");
-        
-        
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
@@ -124,7 +123,7 @@ public class EliminarPedido extends javax.swing.JFrame {
         MenuPrincipal mp = new MenuPrincipal(miConexion);
         mp.setVisible(true);
         mp.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
