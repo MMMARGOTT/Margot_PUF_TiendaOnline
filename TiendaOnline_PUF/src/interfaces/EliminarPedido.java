@@ -5,19 +5,25 @@
 package interfaces;
 
 import gestor.Gestor;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import modelo.Pedido;
 
 /**
  *
  * @author paolaschicote
  */
 public class EliminarPedido extends javax.swing.JFrame {
+    
     Gestor miConexion;
+    ArrayList<Pedido> listaPedidos;
 
     /**
      * Creates new form MenuPrincipal
      */
-    public EliminarPedido(Gestor gestor) {
+    public EliminarPedido(Gestor gestor, ArrayList<Pedido> listaPedidos) {
         this.miConexion = gestor;
+        this.listaPedidos = listaPedidos;
         initComponents();
     }
 
@@ -31,31 +37,96 @@ public class EliminarPedido extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jTextFieldPedido = new javax.swing.JTextField();
+        btnEliminar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Elimina un Pedido ");
 
+        jLabel2.setText("Introduce el id de tu pedido:");
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        btnVolver.setText("Vovler");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(152, 152, 152)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(btnEliminar)))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVolver)
+                    .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(162, Short.MAX_VALUE))
+                .addGap(151, 151, 151))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(53, 53, 53)
                 .addComponent(jLabel1)
-                .addContainerGap(261, Short.MAX_VALUE))
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnVolver))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        // TODO add your handling code here:
+
+        String idPedido = jTextFieldPedido.getText();
+        if (idPedido.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingresa el id de un pedido");
+            return;
+        }
+        int idPedidoInt = Integer.parseInt(idPedido);
+        miConexion.eliminarPedido(idPedidoInt);
+        JOptionPane.showMessageDialog(this, "Pedido eliminado con éxito");
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal(miConexion);
+        mp.setVisible(true);
+        mp.setLocationRelativeTo(null);
+        
+        this.dispose();
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +164,10 @@ public class EliminarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JTextField jTextFieldPedido;
     // End of variables declaration//GEN-END:variables
 }

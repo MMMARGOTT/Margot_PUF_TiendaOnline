@@ -36,11 +36,12 @@ public class EstadoPedido extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextFieldPedido = new javax.swing.JTextField();
-        jButtonEstado = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        BtnVolver = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Introduce el id del pedido:");
+        jLabel1.setText("Introduce el id del Pedido:");
 
         jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel2.setText("Estado de tu pedido");
@@ -51,10 +52,17 @@ public class EstadoPedido extends javax.swing.JFrame {
             }
         });
 
-        jButtonEstado.setText("Estado");
-        jButtonEstado.addActionListener(new java.awt.event.ActionListener() {
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEstadoActionPerformed(evt);
+                btnModificarActionPerformed(evt);
+            }
+        });
+
+        BtnVolver.setText("Volver");
+        BtnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnVolverActionPerformed(evt);
             }
         });
 
@@ -70,8 +78,10 @@ public class EstadoPedido extends javax.swing.JFrame {
                         .addGap(57, 57, 57)
                         .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(187, 187, 187)
-                        .addComponent(jButtonEstado))
+                        .addGap(116, 116, 116)
+                        .addComponent(btnModificar)
+                        .addGap(66, 66, 66)
+                        .addComponent(BtnVolver))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(jLabel2)))
@@ -87,7 +97,9 @@ public class EstadoPedido extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(63, 63, 63)
-                .addComponent(jButtonEstado)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificar)
+                    .addComponent(BtnVolver))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -98,12 +110,12 @@ public class EstadoPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldPedidoActionPerformed
 
-    private void jButtonEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEstadoActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
 
-        String idPedido = jTextFieldPedido.getText();
+        String nombreCliente = jTextFieldPedido.getText();
 
-        if (idPedido.isEmpty()) {
+        if (nombreCliente.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
         } else {
             //miConexion.actualizarEstadoPedido();
@@ -111,7 +123,17 @@ public class EstadoPedido extends javax.swing.JFrame {
 
         }
 
-    }//GEN-LAST:event_jButtonEstadoActionPerformed
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
+        // TODO add your handling code here:
+        MenuPrincipal mp = new MenuPrincipal(miConexion);
+        mp.setVisible(true);
+        mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
+
+        this.dispose(); //Cierra la ventana, sin cerrar la app
+
+    }//GEN-LAST:event_BtnVolverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,7 +171,8 @@ public class EstadoPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEstado;
+    private javax.swing.JButton BtnVolver;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextFieldPedido;

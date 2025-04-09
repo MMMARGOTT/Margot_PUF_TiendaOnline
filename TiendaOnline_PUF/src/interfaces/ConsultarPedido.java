@@ -6,6 +6,7 @@ package interfaces;
 
 import gestor.Gestor;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Pedido;
 
@@ -14,11 +15,10 @@ import modelo.Pedido;
  * @author paolaschicote
  */
 public class ConsultarPedido extends javax.swing.JFrame {
+
     Gestor miConexion;
     ArrayList<Pedido> listaPedidos;
     DefaultTableModel modelo;
-    
-    
 
     /**
      * Creates new form MenuPrincipal
@@ -26,27 +26,31 @@ public class ConsultarPedido extends javax.swing.JFrame {
     public ConsultarPedido(Gestor gestor, ArrayList<Pedido> listaPedidos) {
         this.miConexion = gestor;
         this.modelo = new DefaultTableModel();
-        
+        this.listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
+
+        initComponents();
+    }
+
+    public void ConsultarPedidosporCliente(String nombreCliente) {
+
         modelo.addColumn("id del Pedido");
         modelo.addColumn("Nombre del Cliente");
         modelo.addColumn("Lista de productos");
         modelo.addColumn("Forma de pago");
         modelo.addColumn("Estado del pedido");
-        
-       for (Pedido p : listaPedidos) {
-            Object[] columna = new Object[5];   
+
+        for (Pedido p : listaPedidos) {
+            Object[] columna = new Object[5];
             columna[0] = p.getIdPedido();
             columna[1] = p.getNombreCliente();
             columna[2] = p.getProductos();
             columna[3] = p.getTotalPagar();
             columna[4] = p.getEstados();
-            
+
             modelo.addRow(columna);
 
         }
 
-        
-        initComponents();
     }
 
     /**
@@ -61,6 +65,10 @@ public class ConsultarPedido extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnVolver = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jTextFieldNombre = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnConsultar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,27 +82,67 @@ public class ConsultarPedido extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Introduzca su nombre para ver el pedido:");
+
+        jTextFieldNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldNombreActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        jLabel2.setText("Consultar tu pedido");
+
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(244, 244, 244)
+                        .addComponent(btnVolver))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jLabel2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVolver)
-                .addGap(239, 239, 239))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addComponent(btnConsultar)
+                .addGap(241, 241, 241))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(33, 33, 33)
+                .addComponent(jLabel2)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(btnConsultar)
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btnVolver)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
@@ -104,11 +152,26 @@ public class ConsultarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         MenuPrincipal mp = new MenuPrincipal(miConexion);
         mp.setVisible(true);
-        mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
+        mp.setLocationRelativeTo(null);
 
-        this.dispose(); //Cierra la ventana, sin cerrar la app
-        
+        this.dispose();
+
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void jTextFieldNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldNombreActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+        String nombreCliente = jTextFieldNombre.getText();
+        if (nombreCliente.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ingresa un nombre");
+        } else {
+            ConsultarPedidosporCliente(nombreCliente);
+        }
+
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,8 +209,12 @@ public class ConsultarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
 }

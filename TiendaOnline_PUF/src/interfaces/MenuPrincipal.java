@@ -159,7 +159,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         // TODO add your handling code here:
 
-        EliminarPedido ep = new EliminarPedido(miConexion);
+        EliminarPedido ep = new EliminarPedido(miConexion, listaPedidos);
         ep.setVisible(true);
         ep.setLocationRelativeTo(null);
 

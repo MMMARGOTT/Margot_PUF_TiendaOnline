@@ -74,11 +74,11 @@ public class Gestor {
 
     }
    
-
     public void registrarPedido(String nombreCliente, String productos, double totalPagar, Estado estado) {
         try {
+            PreparedStatement sentencia = null;
             String sql = "INSERT INTO Pedidos (nombre_cliente, productos, total_pagar, estado_pedido) VALUES (?, ?, ?, ?)";
-            PreparedStatement sentencia = conn.prepareStatement(sql);
+            sentencia = conn.prepareStatement(sql);
             sentencia.setString(1, nombreCliente);
             sentencia.setString(2, productos);
             sentencia.setDouble(3, totalPagar);
@@ -86,7 +86,8 @@ public class Gestor {
 
             int pedidosInsertados = sentencia.executeUpdate();
             if (pedidosInsertados > 0) {
-                JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.");
+                JOptionPane.showMessageDialog(null,"Pedido registrado con éxito.");
+                
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
@@ -172,3 +173,7 @@ public class Gestor {
 
     }
 }
+
+
+
+  
