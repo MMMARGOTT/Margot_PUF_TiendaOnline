@@ -162,6 +162,8 @@ public class EstadoPedido extends javax.swing.JFrame {
         if(estadoEnum != null){
             miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
         }
+        
+        JOptionPane.showMessageDialog(this, "El registro ha sido modificado con éxito");
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed

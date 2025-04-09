@@ -127,8 +127,8 @@ public class Gestor {
         try {
             String sql = "UPDATE Pedidos SET estado_pedido = ? WHERE id_pedido = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
-            sentencia.setInt(1, idPedido);
-            sentencia.setString(2, nuevoEstado.toString());
+            sentencia.setString(1, nuevoEstado.toString());
+            sentencia.setInt(2, idPedido);
 
             int pedidoActualizado = sentencia.executeUpdate();
             if (pedidoActualizado > 0) {
