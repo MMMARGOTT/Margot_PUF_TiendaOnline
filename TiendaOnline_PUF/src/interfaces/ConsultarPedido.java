@@ -17,27 +17,28 @@ import modelo.Pedido;
 public class ConsultarPedido extends javax.swing.JFrame {
 
     Gestor miConexion;
-    ArrayList<Pedido> listaPedidos;
     DefaultTableModel modelo;
 
     /**
      * Creates new form MenuPrincipal
      */
-    public ConsultarPedido(Gestor gestor, ArrayList<Pedido> listaPedidos) {
+    public ConsultarPedido(Gestor gestor) {
         this.miConexion = gestor;
         this.modelo = new DefaultTableModel();
-        this.listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
 
         initComponents();
+
     }
 
-    public void ConsultarPedidosporCliente(String nombreCliente) {
+    public void consultarPedidosPorCliente(String nombreCliente) {
 
         modelo.addColumn("id del Pedido");
         modelo.addColumn("Nombre del Cliente");
         modelo.addColumn("Lista de productos");
-        modelo.addColumn("Forma de pago");
+        modelo.addColumn("Total a pagar");
         modelo.addColumn("Estado del pedido");
+
+        ArrayList<Pedido> listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
 
         for (Pedido p : listaPedidos) {
             Object[] columna = new Object[5];
@@ -72,7 +73,8 @@ public class ConsultarPedido extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(modelo);
+        jTable1.setModel(modelo
+        );
         jScrollPane1.setViewportView(jTable1);
 
         btnVolver.setText("Volver");
@@ -165,10 +167,12 @@ public class ConsultarPedido extends javax.swing.JFrame {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
         String nombreCliente = jTextFieldNombre.getText();
+
         if (nombreCliente.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingresa un nombre");
+
+            JOptionPane.showMessageDialog(this, "Ingresa un nombre");
         } else {
-            ConsultarPedidosporCliente(nombreCliente);
+            consultarPedidosPorCliente(nombreCliente);
         }
 
     }//GEN-LAST:event_btnConsultarActionPerformed

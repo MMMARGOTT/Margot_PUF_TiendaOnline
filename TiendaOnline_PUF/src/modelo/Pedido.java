@@ -18,7 +18,7 @@ public class Pedido {
     private double totalPagar;
     private Estado estados;
 
-    public Pedido(int idPedido, String nombreCliente, String productos, double totalPagar) {
+    public Pedido(int idPedido, String nombreCliente, String productos, double totalPagar, Estado estadoEnum) {
         this.idPedido = idPedido;
         this.nombreCliente = nombreCliente;
         this.productos = productos;

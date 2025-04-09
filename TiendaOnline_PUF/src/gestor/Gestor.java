@@ -73,7 +73,7 @@ public class Gestor {
         return matcher.matches();
 
     }
-   
+
     public void registrarPedido(String nombreCliente, String productos, double totalPagar, Estado estado) {
         try {
             PreparedStatement sentencia = null;
@@ -86,32 +86,46 @@ public class Gestor {
 
             int pedidosInsertados = sentencia.executeUpdate();
             if (pedidosInsertados > 0) {
-                JOptionPane.showMessageDialog(null,"Pedido registrado con éxito.");
-                
+                JOptionPane.showMessageDialog(null, "Pedido registrado con éxito.");
+
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }
 
-    public void consultarPedidosPorCliente(String nombreCliente) {
+    public ArrayList<Pedido> consultarPedidosPorCliente(String nombreCliente) {
+        ArrayList<Pedido> listaPedidos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Pedidos WHERE nombre_cliente = ?";
+            String sql = "SELECT id_pedido, nombre_cliente, productos, total_pagar, estado_pedido FROM Pedidos WHERE nombre_cliente = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setString(1, nombreCliente);
-            ResultSet rs = sentencia.executeQuery();
+            ResultSet resultado = sentencia.executeQuery();
 
-            while (rs.next()) {
-                System.out.println("Id: " + rs.getInt("id") + "Productos: " + rs.getString("productos") + "Total: " + rs.getDouble("total_pagar") + "Estado: " + rs.getString("estado_pedido"));
+            while (resultado.next()) {
+                int idPedido = resultado.getInt("id_pedido");
+                String nombre = resultado.getString("nombre_cliente");
+                String productos = resultado.getString("productos");
+                double totalPagar = resultado.getDouble("total_pagar");
+                String estado = resultado.getString("estado_pedido");
+
+                Estado estadoEnum = Estado.valueOf(estado);
+
+                Pedido p = new Pedido(idPedido, nombre, productos, totalPagar, estadoEnum);
+
+                listaPedidos.add(p);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+
+        return listaPedidos;
     }
 
     public void modificarEstadoPedido(int idPedido, String nuevoEstadoPedido) {
         try {
-            String sql = "UPDATE Pedidos SET estado_pedido = ? WHERE id = ?";
+            String sql = "UPDATE Pedidos SET estado_pedido = ? WHERE id_pedido = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setString(1, nuevoEstadoPedido);
             sentencia.setInt(2, idPedido);
@@ -127,7 +141,7 @@ public class Gestor {
 
     public void eliminarPedido(int idPedido) {
         try {
-            String sql = "DELETE FROM Pedidos WHERE id = ?";
+            String sql = "DELETE FROM Pedidos WHERE id_pedido = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
 
@@ -173,7 +187,3 @@ public class Gestor {
 
     }
 }
-
-
-
-  
