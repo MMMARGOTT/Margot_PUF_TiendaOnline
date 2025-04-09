@@ -7,6 +7,7 @@ package interfaces;
 import gestor.Gestor;
 import interfaces.RegistrarPedido;
 import java.util.ArrayList;
+import modelo.Pago;
 import modelo.Pedido;
 
 /**
@@ -17,6 +18,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     Gestor miConexion;
     ArrayList<Pedido> listaPedidos;
+    ArrayList<Pago> listaPagos;
+    
 
     /**
      * Creates new form MenuPrincipal
@@ -41,6 +44,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnEstado = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnFormasPago = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,12 +86,20 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnFormasPago.setForeground(new java.awt.Color(204, 0, 51));
+        btnFormasPago.setText("Adicional: Formas de pago");
+        btnFormasPago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFormasPagoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
+                .addContainerGap(196, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(172, 172, 172))
             .addGroup(layout.createSequentialGroup()
@@ -101,7 +113,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
                             .addComponent(btnEstado, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                             .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFormasPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -117,7 +130,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(btnEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(btnFormasPago, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(btnSalir)
                 .addGap(27, 27, 27))
         );
@@ -171,6 +186,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnFormasPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormasPagoActionPerformed
+        // TODO add your handling code here:
+        FormasdePago fdp = new FormasdePago(miConexion, listaPagos);
+        fdp.setVisible(true);
+        fdp.setLocationRelativeTo(null);
+
+        this.dispose();
+    }//GEN-LAST:event_btnFormasPagoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +234,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEstado;
+    private javax.swing.JButton btnFormasPago;
     private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;

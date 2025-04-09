@@ -155,9 +155,9 @@ public class Gestor {
 
     public void registrarPago(int idPedido, String metodoPago, Date fechaPago) {
         try {
-            
+
             java.sql.Date fechaPagoConvertida = new java.sql.Date(fechaPago.getTime());
-            
+
             String sql = "INSERT INTO Pagos (id_pedido, metodo_pago, fecha_pago) VALUES (?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
@@ -173,19 +173,8 @@ public class Gestor {
         }
     }
 
-    /*
-
-    public void pagoRegistrado(int idPedido) {    igual es boolean al ser un estado?
-        try {
-            String sql = "SELECT COUNT(*) FROM Pagos WHERE id_pedido = ?";
-            PreparedStatement sentencia = conn.prepareStatement(sql);
-            sentencia.setInt(1, idPedido);
-            ResultSet rs = sentencia.executeQuery();
-
-        }
+    public void prepareStatement(String sql) {
+       
     }
-     */
-    public void actualizarEstadoPedido(int idPedido) {
 
-    }
 }
