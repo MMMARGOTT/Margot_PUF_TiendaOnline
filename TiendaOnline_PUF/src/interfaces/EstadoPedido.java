@@ -7,6 +7,7 @@ package interfaces;
 import gestor.Gestor;
 import java.text.ParseException;
 import javax.swing.JOptionPane;
+import modelo.Estado;
 
 /**
  *
@@ -38,6 +39,8 @@ public class EstadoPedido extends javax.swing.JFrame {
         jTextFieldPedido = new javax.swing.JTextField();
         btnModificar = new javax.swing.JButton();
         BtnVolver = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,41 +69,53 @@ public class EstadoPedido extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setText("jLabel3");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Proceso", "Enviado", "Entregado" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(jLabel2)
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(btnModificar))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
-                        .addComponent(jLabel1)
-                        .addGap(57, 57, 57)
-                        .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addComponent(btnModificar)
                         .addGap(66, 66, 66)
                         .addComponent(BtnVolver))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel2)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jLabel2)
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(63, 63, 63)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnModificar)
                     .addComponent(BtnVolver))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,18 +127,41 @@ public class EstadoPedido extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-
+        
+        //Declaramos las variables pertinentes procedentes de la interfaz
         String idPedido = jTextFieldPedido.getText();
+        int idPedidoInt = Integer.parseInt(idPedido);
+
+        String estado = jComboBox1.getSelectedItem().toString();
+
+        Estado estadoEnum = null;
+
         if (idPedido.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Ingresa el id de tu pedido, gracias");
+            JOptionPane.showMessageDialog(this, "Error: Debes ingresar el id de tu pedido");
             return;
         }
-        int idPedidoInt = Integer.parseInt(idPedido);
-        String estadoEnum = "ENVIADO";
 
-        miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
+        if (estado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error: Debes ingresar el nuevo estado de tu pedido");
+        }
 
+        switch (estado) {
+            case "En Proceso":
+                estadoEnum = Estado.EN_PROCESO;
+                break;
 
+            case "Enviado":
+                estadoEnum = Estado.ENVIADO;
+                break;
+
+            case "Entregado":
+                estadoEnum = Estado.ENTREGADO;
+                break;
+        }
+        
+        if(estadoEnum != null){
+            miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
+        }
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
@@ -174,8 +212,10 @@ public class EstadoPedido extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnVolver;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextFieldPedido;
     // End of variables declaration//GEN-END:variables
 }
