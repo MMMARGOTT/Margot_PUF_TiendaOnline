@@ -123,12 +123,11 @@ public class Gestor {
         return listaPedidos;
     }
 
-    public void modificarEstadoPedido(int idPedido, String nuevoEstadoPedido) {
+    public void modificarEstadoPedido(int idPedido) {
         try {
             String sql = "UPDATE Pedidos SET estado_pedido = ? WHERE id_pedido = ?";
             PreparedStatement sentencia = conn.prepareStatement(sql);
-            sentencia.setString(1, nuevoEstadoPedido);
-            sentencia.setInt(2, idPedido);
+            sentencia.setInt(1, idPedido);
 
             int pedidoActualizado = sentencia.executeUpdate();
             if (pedidoActualizado > 0) {
@@ -156,11 +155,14 @@ public class Gestor {
 
     public void registrarPago(int idPedido, String metodoPago, Date fechaPago) {
         try {
+            
+            java.sql.Date fechaPagoConvertida = new java.sql.Date(fechaPago.getTime());
+            
             String sql = "INSERT INTO Pagos (id_pedido, metodo_pago, fecha_pago) VALUES (?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
             sentencia.setString(2, metodoPago);
-            sentencia.setDate(3, fechaPago);
+            sentencia.setDate(3, fechaPagoConvertida);
 
             int pagoRegistrado = sentencia.executeUpdate();
             if (pagoRegistrado > 0) {

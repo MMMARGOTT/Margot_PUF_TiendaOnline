@@ -167,10 +167,8 @@ public class ConsultarPedido extends javax.swing.JFrame {
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         // TODO add your handling code here:
         String nombreCliente = jTextFieldNombre.getText();
-
         if (nombreCliente.isEmpty()) {
-
-            JOptionPane.showMessageDialog(this, "Ingresa un nombre");
+            JOptionPane.showMessageDialog(this, "Ingresa un nombre que exista");
         } else {
             consultarPedidosPorCliente(nombreCliente);
         }
