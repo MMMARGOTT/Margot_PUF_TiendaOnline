@@ -21,6 +21,10 @@ import modelo.Pedido;
  * @author paolaschicote
  */
 public class Gestor {
+    
+    //TAREA:
+    //Función volver para que cuando realice la opción correspondiente vuelva al MenuPrincipal
+    //ComboBox en Registrar
 
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
@@ -172,10 +176,6 @@ public class Gestor {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
-    }
-
-    public void prepareStatement(String sql) {
-       
-    }
+    }   
 
 }

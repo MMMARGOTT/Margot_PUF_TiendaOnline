@@ -114,7 +114,7 @@ public class EliminarPedido extends javax.swing.JFrame {
         }
         int idPedidoInt = Integer.parseInt(idPedido);
         miConexion.eliminarPedido(idPedidoInt);
-        JOptionPane.showMessageDialog(this, "Pedido eliminado con éxito");
+        
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
