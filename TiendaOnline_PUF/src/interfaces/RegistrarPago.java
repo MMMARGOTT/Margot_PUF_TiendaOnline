@@ -129,12 +129,11 @@ public class RegistrarPago extends javax.swing.JFrame {
         String formadePago = jComboBoxPago.getSelectedItem().toString();
         String fechadePago = jTextFieldFecha.getText();
 
-        int idInt = Integer.parseInt(id);
         int idPedidInt = Integer.parseInt(idPedido);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         java.sql.Date fechaConvertida = null;
 
-        if (id.isEmpty() || idPedido.isEmpty() || formadePago.isEmpty() || fechadePago.isEmpty()) {
+        if (idPedido.isEmpty() || formadePago.isEmpty() || fechadePago.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
 
         } else {
