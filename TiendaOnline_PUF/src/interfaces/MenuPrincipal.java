@@ -64,7 +64,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnEstado.setText("Estado de tu pedido");
+        btnEstado.setText("Modificar estado de tu pedido");
         btnEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEstadoActionPerformed(evt);

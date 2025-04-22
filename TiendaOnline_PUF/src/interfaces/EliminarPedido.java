@@ -115,13 +115,13 @@ public class EliminarPedido extends javax.swing.JFrame {
         int idPedidoInt = Integer.parseInt(idPedido);
         miConexion.eliminarPedido(idPedidoInt);
         miConexion.volverMenu(miConexion);
-        
+
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-         miConexion.volverMenu(miConexion);
+        miConexion.volverMenu(miConexion);
     }//GEN-LAST:event_btnVolverActionPerformed
 
     /**

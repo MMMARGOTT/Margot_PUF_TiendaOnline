@@ -23,11 +23,10 @@ import modelo.Pedido;
  * @author paolaschicote
  */
 public class Gestor {
-    
+
     //TAREA:
     //Función volver para que cuando realice la opción correspondiente vuelva al MenuPrincipal
     //ComboBox en Registrar
-
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
     private String user;
@@ -180,12 +179,13 @@ public class Gestor {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }   
-*/
-}
-    public void volverMenu(Gestor gestor){
-        
+         */
+    }
+
+    public void volverMenu(Gestor gestor) {
+
         MenuPrincipal mp = new MenuPrincipal(gestor);
         mp.setVisible(true);
         mp.setLocationRelativeTo(null);
     }
-            }
+}

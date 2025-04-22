@@ -98,7 +98,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnEstado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Estado de tu pedido"/>
+        <Property name="text" type="java.lang.String" value="Modificar estado de tu pedido"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEstadoActionPerformed"/>

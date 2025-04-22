@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import excepciones.MyException;
 import gestor.Gestor;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -25,12 +26,12 @@ public class ConsultarPedido extends javax.swing.JFrame {
     public ConsultarPedido(Gestor gestor) {
         this.miConexion = gestor;
         this.modelo = new DefaultTableModel();
-
         initComponents();
+        establecerFormatoTabla();
 
     }
 
-    public void consultarPedidosPorCliente(String nombreCliente) {
+    public void establecerFormatoTabla() {
 
         modelo.addColumn("id del Pedido");
         modelo.addColumn("Nombre del Cliente");
@@ -38,8 +39,18 @@ public class ConsultarPedido extends javax.swing.JFrame {
         modelo.addColumn("Total a pagar");
         modelo.addColumn("Estado del pedido");
 
-        ArrayList<Pedido> listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
+    }
 
+    public void limpiarTabla() {
+        int numeroFilas = modelo.getRowCount();
+
+        for (int i = numeroFilas - 1; i >= 0; i--) {
+            modelo.removeRow(i);
+        }
+    }
+
+    public void rellenarTabla(ArrayList<Pedido> listaPedidos) {
+        limpiarTabla();
         for (Pedido p : listaPedidos) {
             Object[] columna = new Object[5];
             columna[0] = p.getIdPedido();
@@ -152,11 +163,7 @@ public class ConsultarPedido extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal mp = new MenuPrincipal(miConexion);
-        mp.setVisible(true);
-        mp.setLocationRelativeTo(null);
-
-        this.dispose();
+        miConexion.volverMenu(miConexion);
 
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -168,12 +175,13 @@ public class ConsultarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nombreCliente = jTextFieldNombre.getText();
         if (nombreCliente.isEmpty()) {
+            miConexion.volverMenu(miConexion);
             JOptionPane.showMessageDialog(this, "Ingresa un nombre que exista");
         } else {
-            consultarPedidosPorCliente(nombreCliente);
-             miConexion.volverMenu(miConexion);
+            ArrayList<Pedido> listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
+            rellenarTabla(listaPedidos);
+            
         }
-
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     /**
