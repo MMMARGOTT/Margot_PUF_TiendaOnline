@@ -19,7 +19,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     Gestor miConexion;
     ArrayList<Pedido> listaPedidos;
     ArrayList<Pago> listaPagos;
-    
 
     /**
      * Creates new form MenuPrincipal
@@ -188,9 +187,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnFormasPagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormasPagoActionPerformed
         // TODO add your handling code here:
-        FormasdePago fdp = new FormasdePago(miConexion, listaPagos);
-        fdp.setVisible(true);
-        fdp.setLocationRelativeTo(null);
+        RegistrarPago rp = new RegistrarPago(miConexion, listaPagos);
+        rp.setVisible(true);
+        rp.setLocationRelativeTo(null);
 
         this.dispose();
     }//GEN-LAST:event_btnFormasPagoActionPerformed

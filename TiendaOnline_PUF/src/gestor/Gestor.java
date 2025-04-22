@@ -6,9 +6,11 @@ package gestor;
 
 import java.sql.*;
 import excepciones.MyException;
+import interfaces.MenuPrincipal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -158,10 +160,11 @@ public class Gestor {
         }
     }
 
-    public void registrarPago(int idPedido, String metodoPago, Date fechaPago) {
+    public void registrarPago(int idPedido, String metodoPago, SimpleDateFormat fechaPago) {
+        /*
         try {
 
-            java.sql.Date fechaPagoConvertida = new java.sql.Date(fechaPago.getTime());
+            java.sql.Date fechaPagoConvertida = new java.sql.Date
 
             String sql = "INSERT INTO Pagos (id_pedido, metodo_pago, fecha_pago) VALUES (?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
@@ -177,5 +180,12 @@ public class Gestor {
             JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
     }   
-
+*/
 }
+    public void volverMenu(Gestor gestor){
+        
+        MenuPrincipal mp = new MenuPrincipal(gestor);
+        mp.setVisible(true);
+        mp.setLocationRelativeTo(null);
+    }
+            }

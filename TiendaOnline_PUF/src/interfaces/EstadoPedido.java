@@ -161,6 +161,7 @@ public class EstadoPedido extends javax.swing.JFrame {
         
         if(estadoEnum != null){
             miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
+            miConexion.volverMenu(miConexion);
         }
         
 
@@ -168,12 +169,7 @@ public class EstadoPedido extends javax.swing.JFrame {
 
     private void BtnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVolverActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal mp = new MenuPrincipal(miConexion);
-        mp.setVisible(true);
-        mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
-
-        this.dispose(); //Cierra la ventana, sin cerrar la app
-
+        miConexion.volverMenu(miConexion);
     }//GEN-LAST:event_BtnVolverActionPerformed
 
     /**

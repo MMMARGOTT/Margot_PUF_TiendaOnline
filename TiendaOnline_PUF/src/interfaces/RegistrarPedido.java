@@ -154,6 +154,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
             } else {
                 miConexion.registrarPedido(nombreCliente, listaProductos, totalPagarDouble, estadoEnum);
+                miConexion.volverMenu(miConexion);
                 JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
 
             }
@@ -166,11 +167,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-        MenuPrincipal mp = new MenuPrincipal(miConexion);
-        mp.setVisible(true);
-        mp.setLocationRelativeTo(null); //Para poner la ventana en el centro
-
-        this.dispose(); //Cierra la ventana, sin cerrar la app
+            miConexion.volverMenu(miConexion);
 
     }//GEN-LAST:event_btnVolverActionPerformed
 

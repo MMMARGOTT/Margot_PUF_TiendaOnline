@@ -7,8 +7,10 @@ package interfaces;
 import gestor.Gestor;
 import static java.lang.String.format;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import modelo.Pago;
 
 /**
  *
@@ -17,13 +19,16 @@ import javax.swing.JOptionPane;
 public class RegistrarPago extends javax.swing.JFrame {
 
     Gestor miConexion;
+    ArrayList<Pago> listaPagos;
 
     /**
      * Creates new form RegistrarPago
      */
-    public RegistrarPago(Gestor gestor) {
-        this.
-                initComponents();
+    public RegistrarPago(Gestor gestor, ArrayList<Pago> listaPagos) {
+
+        this.miConexion = gestor;
+
+        initComponents();
     }
 
     /**
@@ -64,6 +69,11 @@ public class RegistrarPago extends javax.swing.JFrame {
         });
 
         btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         jComboBoxPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "PayPal", "Transferencia", " " }));
 
@@ -130,17 +140,23 @@ public class RegistrarPago extends javax.swing.JFrame {
         String fechadePago = jTextFieldFecha.getText();
 
         int idPedidInt = Integer.parseInt(idPedido);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        java.sql.Date fechaConvertida = null;
+        SimpleDateFormat sdfFecha = new SimpleDateFormat("yyyy-MM-dd");
+        
 
         if (idPedido.isEmpty() || formadePago.isEmpty() || fechadePago.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
 
         } else {
-            miConexion.registrarPago(idPedidInt, formadePago, fechaConvertida);
+            miConexion.registrarPago(idPedidInt, formadePago, sdfFecha);
+            miConexion.volverMenu(miConexion);
             JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
         }
     }//GEN-LAST:event_btnPagarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        // TODO add your handling code here:
+         miConexion.volverMenu(miConexion);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     /**
      * @param args the command line arguments
