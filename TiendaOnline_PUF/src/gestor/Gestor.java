@@ -159,27 +159,21 @@ public class Gestor {
         }
     }
 
-    public void registrarPago(int idPedido, String metodoPago, SimpleDateFormat fechaPago) {
-        /*
+    public void registrarPago(int idPedido, String metodoPago, Date fechaPago) {
         try {
-
-            java.sql.Date fechaPagoConvertida = new java.sql.Date
-
             String sql = "INSERT INTO Pagos (id_pedido, metodo_pago, fecha_pago) VALUES (?, ?, ?)";
             PreparedStatement sentencia = conn.prepareStatement(sql);
             sentencia.setInt(1, idPedido);
             sentencia.setString(2, metodoPago);
-            sentencia.setDate(3, fechaPagoConvertida);
+            sentencia.setDate(3, fechaPago);
 
-            int pagoRegistrado = sentencia.executeUpdate();
-            if (pagoRegistrado > 0) {
+            int pagosInsertados = sentencia.executeUpdate();
+            if (pagosInsertados > 0) {
                 JOptionPane.showMessageDialog(null, "Pago registrado con éxito.");
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al registrar el pago: " + ex.getMessage());
         }
-    }   
-         */
     }
 
     public void volverMenu(Gestor gestor) {

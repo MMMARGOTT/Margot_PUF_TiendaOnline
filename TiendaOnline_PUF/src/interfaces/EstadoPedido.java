@@ -129,7 +129,7 @@ public class EstadoPedido extends javax.swing.JFrame {
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
-        
+
         //Declaramos las variables pertinentes procedentes de la interfaz
         String idPedido = jTextFieldPedido.getText();
         int idPedidoInt = Integer.parseInt(idPedido);
@@ -160,13 +160,13 @@ public class EstadoPedido extends javax.swing.JFrame {
                 estadoEnum = Estado.ENTREGADO;
                 break;
         }
-        
-        if(estadoEnum != null){
+
+        if (estadoEnum != null) {
             miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
             miConexion.volverMenu(miConexion);
             this.dispose();
         }
-        
+
 
     }//GEN-LAST:event_btnModificarActionPerformed
 

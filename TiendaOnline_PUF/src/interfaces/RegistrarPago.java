@@ -6,9 +6,12 @@ package interfaces;
 
 import gestor.Gestor;
 import static java.lang.String.format;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import modelo.Pago;
 
@@ -46,9 +49,10 @@ public class RegistrarPago extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextFieldIdPedido = new javax.swing.JTextField();
         jTextFieldFecha = new javax.swing.JTextField();
-        btnPagar = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jComboBoxPago = new javax.swing.JComboBox<>();
+        btnVer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,10 +65,10 @@ public class RegistrarPago extends javax.swing.JFrame {
 
         jLabel5.setText("Fecha del pago");
 
-        btnPagar.setText("Pagar");
-        btnPagar.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPagarActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -77,87 +81,112 @@ public class RegistrarPago extends javax.swing.JFrame {
 
         jComboBoxPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tarjeta", "PayPal", "Transferencia", " " }));
 
+        btnVer.setText("Ver");
+        btnVer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldIdPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                            .addComponent(jTextFieldFecha)
-                            .addComponent(jComboBoxPago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(btnPagar)
-                        .addGap(83, 83, 83)
-                        .addComponent(btnVolver)))
-                .addGap(0, 60, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
+                .addGap(195, 195, 195)
                 .addComponent(jLabel2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnRegistrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel5)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxPago, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(btnVer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVolver)
+                        .addGap(67, 67, 67))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jLabel2)
                 .addGap(45, 45, 45)
+                .addComponent(jLabel2)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextFieldIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jComboBoxPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                    .addComponent(jTextFieldIdPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPagar)
-                    .addComponent(btnVolver))
-                .addGap(26, 26, 26))
+                    .addComponent(btnRegistrar)
+                    .addComponent(btnVolver)
+                    .addComponent(btnVer))
+                .addGap(59, 59, 59))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPagarActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+
         // TODO add your handling code here:
-
         String idPedido = jTextFieldIdPedido.getText();
-        String formadePago = jComboBoxPago.getSelectedItem().toString();
-        String fechadePago = jTextFieldFecha.getText();
+        String formaPago = jComboBoxPago.getSelectedItem().toString();
+        String fechaPago = jTextFieldFecha.getText();
 
-        int idPedidInt = Integer.parseInt(idPedido);
-        SimpleDateFormat sdfFecha = new SimpleDateFormat("yyyy-MM-dd");
-        
-
-        if (idPedido.isEmpty() || formadePago.isEmpty() || fechadePago.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos ");
-
+        if (idPedido.isEmpty() || formaPago.trim().isEmpty() || fechaPago.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Error: Hay que rellenar todos los campos");
         } else {
-            miConexion.registrarPago(idPedidInt, formadePago, sdfFecha);
-            miConexion.volverMenu(miConexion);
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
+            try {
+                int idPedidoInt = Integer.parseInt(idPedido);
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date fechaModificada = sdf.parse(fechaPago);
+                java.sql.Date fechaModificada2 = new java.sql.Date(fechaModificada.getTime());
+
+                miConexion.registrarPago(idPedidoInt, formaPago, fechaModificada2);
+
+                miConexion.volverMenu(miConexion);
+                this.dispose();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error al registrar el pago: " + ex.getMessage());
+            }
         }
-    }//GEN-LAST:event_btnPagarActionPerformed
+
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
-         miConexion.volverMenu(miConexion);
+        miConexion.volverMenu(miConexion);
     }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
+        // TODO add your handling code here:
+        InformacionPagos ip = new InformacionPagos(miConexion);
+        ip.setVisible(true);
+        ip.setLocationRelativeTo(null);
+
+        this.dispose();
+    }//GEN-LAST:event_btnVerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,7 +225,8 @@ public class RegistrarPago extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPagar;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnVer;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> jComboBoxPago;
     private javax.swing.JLabel jLabel2;

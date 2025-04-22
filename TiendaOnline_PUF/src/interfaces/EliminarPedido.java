@@ -115,6 +115,7 @@ public class EliminarPedido extends javax.swing.JFrame {
         int idPedidoInt = Integer.parseInt(idPedido);
         miConexion.eliminarPedido(idPedidoInt);
         miConexion.volverMenu(miConexion);
+        this.dispose();
 
 
     }//GEN-LAST:event_btnEliminarActionPerformed
