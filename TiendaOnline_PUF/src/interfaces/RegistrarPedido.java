@@ -45,7 +45,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
         jTextFieldNombreCliente = new javax.swing.JTextField();
         jTextFieldProductos = new javax.swing.JTextField();
         jTextFieldTotalPagar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
 
@@ -62,10 +62,10 @@ public class RegistrarPedido extends javax.swing.JFrame {
 
         jLabel6.setText("Estado");
 
-        jButton1.setText("Registrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnRegistrarActionPerformed(evt);
             }
         });
 
@@ -76,7 +76,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En Proceso", "Enviado", "Entregado" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EN_PROCESO", "ENVIADO", "ENTREGADO" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,7 +100,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
-                        .addComponent(jButton1)
+                        .addComponent(btnRegistrar)
                         .addGap(48, 48, 48)
                         .addComponent(btnVolver)))
                 .addContainerGap(89, Short.MAX_VALUE))
@@ -128,7 +128,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnRegistrar)
                     .addComponent(btnVolver))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
@@ -136,7 +136,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         // TODO add your handling code here:
 
         String nombreCliente = jTextFieldNombreCliente.getText();
@@ -155,7 +155,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
             } else {
                 miConexion.registrarPedido(nombreCliente, listaProductos, totalPagarDouble, estadoEnum);
                 miConexion.volverMenu(miConexion);
-                JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
+                this.dispose();
 
             }
         } else {
@@ -163,7 +163,7 @@ public class RegistrarPedido extends javax.swing.JFrame {
         }
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         // TODO add your handling code here:
@@ -207,8 +207,8 @@ public class RegistrarPedido extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton btnVolver;
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

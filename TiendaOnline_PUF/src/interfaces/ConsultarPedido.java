@@ -175,12 +175,12 @@ public class ConsultarPedido extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nombreCliente = jTextFieldNombre.getText();
         if (nombreCliente.isEmpty()) {
-            miConexion.volverMenu(miConexion);
+
             JOptionPane.showMessageDialog(this, "Ingresa un nombre que exista");
         } else {
             ArrayList<Pedido> listaPedidos = miConexion.consultarPedidosPorCliente(nombreCliente);
             rellenarTabla(listaPedidos);
-            
+
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
 

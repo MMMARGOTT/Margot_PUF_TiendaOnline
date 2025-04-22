@@ -164,6 +164,7 @@ public class EstadoPedido extends javax.swing.JFrame {
         if(estadoEnum != null){
             miConexion.modificarEstadoPedido(idPedidoInt, estadoEnum);
             miConexion.volverMenu(miConexion);
+            this.dispose();
         }
         
 

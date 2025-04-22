@@ -149,6 +149,7 @@ public class RegistrarPago extends javax.swing.JFrame {
         } else {
             miConexion.registrarPago(idPedidInt, formadePago, sdfFecha);
             miConexion.volverMenu(miConexion);
+            this.dispose();
             JOptionPane.showMessageDialog(null, "Pedido registrado con éxito");
         }
     }//GEN-LAST:event_btnPagarActionPerformed
